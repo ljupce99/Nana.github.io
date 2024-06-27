@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Честитки за матура</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Pacifico', cursive;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #000;
+        }
+
+        .background {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            z-index: -1;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            z-index: 1;
+            width: 90%;
+            max-width: 500px;
+            box-sizing: border-box;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 15%;
+            margin-bottom: 20px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        button {
+            font-family: 'Pacifico', cursive;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .bubble {
+            position: absolute;
+            width: 10vw;
+            height: 10vw;
+            min-width: 70px;
+            min-height: 70px;
+            max-width: 150px;
+            max-height: 150px;
+            color: #3a8de0;
+            border-radius: 50%;
+        }
+
+        .bubble-dummy {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            border-radius: inherit;
+            border: .2em solid currentColor;
+        }
+
+        @keyframes bubbleUp {
+            from {
+                opacity: 0;
+                transform: scale(0);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(1.1);
+            }
+        }
+
+        .heart {
+            width: 100%;
+            height: 100%;
+            background: transparent;
+        }
+
+        .heart path {
+            fill: #e27373;
+            stroke: none;
+        }
+
+        .additional-images img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 10%;
+            margin: 10px;
+        }
+
+        .fullscreen-message {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            z-index: 999;
+            display: none;
+        }
+
+        .fullscreen-message p {
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="background"></div>
+<div class="container">
+    <h1>Честитки за матура!</h1>
+    <img src="sliki/IMG_30534.jpg" alt="Слика од девојката" class="profile-image">
+    <img class="profile-image" src="sliki/IMG_1911.jpeg" alt="Слика 1" />
+    <p>Драга Надице,</p>
+    <p>Честитки за успешно завршената матура! Твојата посветеност и напорна работа конечно дадоа плод. Ти посакуваме уште многу успеси во иднина.</p>
+    <p>Среќно и понатаму!</p>
+    <button onclick="showMessage()">Погледни ја специјалната порака</button>
+    <div id="specialMessage" class="hidden">
+        <div class="additional-images">
+            <img src="sliki/IMG_2378.jpeg" alt="Слика 2" />
+            <img src="sliki/IMG_2502.jpeg" alt="Слика 3" /><br>
+            <img src="sliki/IMG_2367.JPG" alt="Слика 4" />
+            <img src="sliki/IMG_2702.jpeg" alt="Слика 5" />
+        </div>
+        <p>Можеби не можам да ти дадам поклон, но јас вчера направив оваа веб страница за тебе. Мала пажња од мене, те сакам, љупче :)</p>
+        <button onclick="showFullscreenMessage()">Ако не ми се савиш кликни</button>
+    </div>
+</div>
+<div class="fullscreen-message" id="fullscreenMessage">
+    <p>
+        Фала ти што не ми се јави.
+        Цели 5 часа го правев ова за да стигниш до ова порака.
+        Ако барем малку ме сакаш ќе ми се јавеше.
+        Сега е касно не ме барај до 2ри “ФАЛА„
+        (Слободно вадисе со твојте психички проблеми)
+    </p>
+    <button onclick="hideFullscreenMessage()">Затвори</button>
+</div>
+<script>
+    function showMessage() {
+        document.getElementById('specialMessage').classList.toggle('hidden');
+        if (!document.getElementById('specialMessage').classList.contains('hidden')) {
+            document.getElementById('specialMessage').scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+
+    function showFullscreenMessage() {
+        document.getElementById('fullscreenMessage').style.display = 'flex';
+    }
+
+    function hideFullscreenMessage() {
+        document.getElementById('fullscreenMessage').style.display = 'none';
+    }
+
+    (function() {
+        var ctx = new (window.AudioContext || window.webkitAudioContext)();
+        function createSound(size, fr, delay, type, vol) {
+            return;
+        }
+
+        function getRandomColor() {
+            var colors = ["#456", "#890", "#634", "#299", "tomato", "#fb3"],
+                idx = Math.floor(colors.length * Math.random());
+            return colors[idx];
+        }
+
+        function animateIt(el, dur, delay) {
+            var animateEl = el.animate([
+                    {
+                        opacity: 0,
+                        transform: "translate(-50%, -50%) scale(0)"
+                    },
+                    {
+                        opacity: 1,
+                        transform: "translate(-50%, -50%) scale(1)"
+                    },
+                    {
+                        opacity: 0,
+                        transform: "translate(-50%, -50%) scale(1.1)"
+                    }
+                ],
+                {
+                    duration: dur,
+                    easing: "ease-out",
+                    fill: "forwards",
+                    delay: delay || 0
+                });
+            return animateEl;
+        }
+
+        function createBubble() {
+            var ns = "http://www.w3.org/2000/svg",
+                bubble = document.createElement("div"),
+                bubbleDummy = document.createElement("div"),
+                heart = document.createElementNS(ns, "svg"),
+                heartPath = document.createElementNS(ns, "path");
+
+            heart.setAttribute("viewBox", "0 0 600 500")
+            heartPath.setAttribute("d", "M300,150 C500,10 600,300 300,400 C0,300 100,10 300,150");
+            bubble.classList.add("bubble");
+            bubble.style.color = getRandomColor();
+            bubbleDummy.classList.add("bubble-dummy");
+            heart.classList.add("heart");
+
+            heart.appendChild(heartPath);
+            bubble.appendChild(bubbleDummy);
+            bubble.appendChild(heart);
+            document.body.appendChild(bubble);
+
+            return {
+                setPosition: function(x, y) {
+                    bubble.style.left = x + "px";
+                    bubble.style.top = y + "px";
+                },
+                _animate: function() {
+                    var animateBubble = animateIt(bubbleDummy, 1200),
+                        animateHeart = animateIt(heart, 2000);
+                    return {
+                        bubbleDur: 1200,
+                        heartDur: 2000
+                    }
+                },
+                remove: function(el) {
+                    bubble.remove();
+                }
+            }
+        }
+
+        document.body.addEventListener("click", handleDown, false);
+        document.body.addEventListener("touchstart", handleDown, false);
+
+        function handleDown(e) {
+            var _x = e.pageX,
+                _y = e.pageY;
+            var bubble = createBubble();
+            bubble.setPosition(_x, _y);
+            var animation = bubble._animate(),
+                totalDelay = animation.bubbleDur + animation.heartDur;
+            if (e.type) {
+                createSound(20, 5000, 1, "sawtooth", 1);
+            }
+            setTimeout(() => {
+                bubble.remove();
+            }, totalDelay);
+        }
+
+        var w = document.body.clientWidth,
+            h = document.body.clientHeight;
+
+        function bubbleUp() {
+            var de = {
+                pageX: Math.random() * w,
+                pageY: Math.random() * h
+            }
+            handleDown(de);
+            bblUp = setTimeout(bubbleUp, 200);
+        }
+        bubbleUp();
+
+        window.addEventListener("resize", function() {
+            w = document.body.clientWidth,
+                h = document.body.clientHeight;
+        }, false);
+    })();
+</script>
+</body>
+</html>
